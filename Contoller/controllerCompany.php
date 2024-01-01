@@ -4,6 +4,7 @@
  include "Model\City\CityDAO.php" ;
  include "Model\Route\RouteDAO.php" ;
  include "Model\horraire\horraireDAO.php" ;
+ include "Model\Travel\TravelDAO.php" ;
 
 
 
@@ -105,6 +106,14 @@ class contoller_BUSs {
        
     }
 }
+// controller/TravelController.php
+class controller_Travels {
+    function getTravels() {
+        $travelDAO = new TravelDAO();
+        $travels = $travelDAO->get_travels();
+        include "View/travel.php";
+    }
+}
 
 class contoller_Citys {
 
@@ -137,23 +146,6 @@ class contoller_Citys {
         include "View\CityForm.php" ; 
     }
  
-
-
-    function setCitys()  {
-       $name = $_POST["name"] ; 
-       $capacite = $_POST["capacite"] ; 
-       $id = $_POST["id"] ; 
-       $company = $_POST["company"] ; 
-
-   $CityDAO = new CityDAO() ;
-   $City = new City(  $id  ,  $name) ;
-
-
-    $CityDAO->update_City($City);
-
-    include "View\CityForm.php"  ; 
-       
-    }
 }
 
 class contoller_Routes {
@@ -162,8 +154,16 @@ class contoller_Routes {
         
    $RouteDAO = new RouteDAO() ;
    $Routes = $RouteDAO-> get_Routes();
+   $CityDAO = new CityDAO();
+  
+   
+        foreach ($Routes as $Route) {
+            $Route->setDepartCityName($CityDAO->getCityNameById($Route->getDepart_city()));
+            $Route->setArriveCityName($CityDAO->getCityNameById($Route->getArrive_city()));
+            
+        }
 
-   include "View\Route.php" ; 
+   include "View/travel.php" ; 
 
 
     }
@@ -209,15 +209,31 @@ class contoller_Routes {
 
 class contoller_horraires {
 
-    function gethorraires()  {
+    function gethorraires($depart , $arrive) {
+        $horraireDAO = new horraireDAO();
+        if($depart == 0 || $arrive == 0){
+            $horraires = $horraireDAO->get_horraires();
+        }else{
+            $horraires = $horraireDAO->get_horraires_by_search($depart, $arrive);
+        }
         
-   $horraireDAO = new horraireDAO() ;
-   $horraires = $horraireDAO-> get_horraires();
-
-   include "View\horraire.php" ; 
-
-
+        $RouteDAO = new RouteDAO();
+        $CityDAO = new CityDAO();
+        $BUSDAO = new BUSDAO();
+        $companyDAO = new CompanyDAO();
+    
+        foreach ($horraires as $horraire) {
+            $horraire->setDepartnamecity($CityDAO->getCityNameById($RouteDAO->getcityoftheroutedepart($horraire->getTri9())));
+            $horraire->setArrivetnamecity($CityDAO->getCityNameById($RouteDAO->getcityoftheroutearive($horraire->getTri9())));
+            $horraire->setCompanyname($companyDAO->getcompanyNameById($BUSDAO->get_id_of_company($horraire->getBus())));
+            $horraire->setImagecompany($companyDAO->getcompanyImageById($BUSDAO->get_id_of_company($horraire->getBus())));
+            
+        }
+    
+        include "View\View.php";
     }
+    
+    
 
     function gethorrairesForm()  {
         
@@ -240,20 +256,5 @@ class contoller_horraires {
  
 
 
-    function sethorraires()  {
-       $hr_dep = $_POST["hr_dep"] ; 
-       $hr_arv = $_POST["hr_arv"] ; 
-       $Prix = $_POST["Prix"] ; 
-       $nhar = $_POST["nhar"] ; 
-       $tri9 = $_POST["tri9"] ; 
-
-   $horraireDAO = new horraireDAO() ;
-   $horraire = new horraire(  $hr_dep, $hr_arv,$Prix,$nhar,$tri9) ;
-
-
-    $horraireDAO->update_horraire($horraire);
-
-    include "View\horraireForm.php"  ; 
-       
-    }
+   
 }

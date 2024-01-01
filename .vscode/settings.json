@@ -12,7 +12,7 @@
             "name": "BUS",
             "database": "bustravel",
             "username": "root",
-            "password": ""
+            "password": "123"
         }
     ]
 }

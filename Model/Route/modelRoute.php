@@ -9,11 +9,13 @@
         private $Arrive_city;
         private $duree;
         private $periode;
-
+        private $departCityName;
+        private $arriveCityName;
+        private $companyname;
         
 
        
-
+        
 
 
         public function __construct($id, $depart_city,$Arrive_city,$duree,$periode
@@ -25,6 +27,8 @@
             $this->periode = $periode;
         }
 
+
+        
             /**
              * Get the value of id
              */ 
@@ -64,5 +68,45 @@
             {
                         return $this->periode;
             }
+
+
+
+            public function setDepartCityName($departCityName) {
+                $this->departCityName = $departCityName;
+            }
+        
+            public function getDepartCityName() {
+                return $this->departCityName;
+            }
+        
+            public function setArriveCityName($arriveCityName) {
+                $this->arriveCityName = $arriveCityName;
+            }
+        
+            public function getArriveCityName() {
+                return $this->arriveCityName;
+            }
+
+
+
+        /**
+         * Get the value of companyname
+         */ 
+        public function getCompanyname()
+        {
+                return $this->companyname;
+        }
+
+        /**
+         * Set the value of companyname
+         *
+         * @return  self
+         */ 
+        public function setCompanyname($companyname)
+        {
+                $this->companyname = $companyname;
+
+                return $this;
+        }
     }
 ?>
