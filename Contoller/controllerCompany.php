@@ -139,21 +139,7 @@ class contoller_Citys {
  
 
 
-    function setCitys()  {
-       $name = $_POST["name"] ; 
-       $capacite = $_POST["capacite"] ; 
-       $id = $_POST["id"] ; 
-       $company = $_POST["company"] ; 
-
-   $CityDAO = new CityDAO() ;
-   $City = new City(  $id  ,  $name) ;
-
-
-    $CityDAO->update_City($City);
-
-    include "View\CityForm.php"  ; 
-       
-    }
+    
 }
 
 class contoller_Routes {
