@@ -38,6 +38,34 @@ class CompanyDAO{
         return $company;
           
     }
+    
+    
+    public function getcompanyNameById($id) {
+        $query = "SELECT name FROM company WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['name'];
+        } else {
+      
+            return "City Not Found"; 
+        }
+        
+    }
+    public function getcompanyImageById($id) {
+        $query = "SELECT image FROM company WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['image'];
+    } else {
+        return "City Not Found"; 
+    }
+    }
 
 
 

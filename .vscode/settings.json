@@ -12,6 +12,20 @@
             "name": "BUS",
             "database": "bustravel",
             "username": "root",
+            "password": "123"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "breif9",
+            "database": "bustravel",
+            "username": "root",
             "password": ""
         }
     ]

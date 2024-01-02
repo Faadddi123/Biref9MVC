@@ -1,39 +1,50 @@
-<?php 
-
-
-?>
+<!-- View\horraire.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="whr_depth=device-whr_depth, initial-scale=1.0">
-    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horraires</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <h1>Liste des livres</h1>
-    <table>
-        <tr>
-        <th>hr_dep</th>
-        <th>hr_dep</th>
-        <th>Prix</th>
-        <th>nhar</th>
-        <th>tri9</th>
-     
-        </tr>
-        <?php
-            foreach($horraires as $horraire1){
-                echo "<tr> 
-                    <td>".$horraire1->gethr_dep()."</td>
-                    <td>".$horraire1->gethr_arv()."</td>
-                    <td>".$horraire1->getPrix()."</td>
-                    <td>".$horraire1->getnhar()."</td>
-                    <td>".$horraire1->gettri9()."</td>
 
-             
-                </tr>";
-            }
-        ?>
-            <td></td>
-    </table>
+<h2>Horraires</h2>
+
+<table>
+    <tr>
+        <th>Depart City</th>
+        <th>Arrive City</th>
+        <th>Price</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+        <th>Company</th>
+    </tr>
+    <?php foreach ($horraires as $horraire): ?>
+        <tr>
+            <td><?php echo $horraire->getDepartnamecity(); ?></td>
+            <td><?php echo $horraire->getArrivetnamecity(); ?></td>
+            <td><?php echo $horraire->getPrix(); ?></td>
+            <td><?php echo $horraire->gethr_dep(); ?></td>
+            <td><?php echo $horraire->getHr_arv(); ?></td>
+            <td><?php echo $horraire->getCompanyname(); ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
 </body>
 </html>

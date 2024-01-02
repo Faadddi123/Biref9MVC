@@ -19,7 +19,38 @@ class RouteDAO{
         return $Routes;
 
     }
-
+    public function getcityoftheroutearive($id) {
+        $query = "SELECT Arrive_city FROM Route WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        // Check if the query was successful
+        if ($stmt->rowCount() > 0) {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['Arrive_city'];
+        } else {
+            // Handle the case when no rows are found (return a default value or throw an exception)
+            return "City Not Found"; // You can replace this with any default value or error message
+        }
+    }
+    
+    public function getcityoftheroutedepart($id) {
+        $query = "SELECT depart_city FROM Route WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        // Check if the query was successful
+        if ($stmt->rowCount() > 0) {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['depart_city'];
+        } else {
+            // Handle the case when no rows are found (return a default value or throw an exception)
+            return "City Not Found"; // You can replace this with any default value or error message
+        }
+    }
+    
     public function update_Route($Route){
         $query = "UPDATE `Route` SET `name`='".$Route->getname()."',`image`='".$Route->getimage()."' where `id`='".$Route->getid()."'";
         // echo $query;
@@ -38,8 +69,6 @@ class RouteDAO{
         return $Route;
           
     }
-
-
 
 }
 
