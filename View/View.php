@@ -30,7 +30,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="booking-form" style="margin-top: 100px;">
-						<form method="post" action="index.php">
+						<form method="post" action="index.php?action=find">
 							<div class="row" >
 								<div class="col-md-3">
 									<div class="form-header">
@@ -42,8 +42,8 @@
 										<div class="col-md-4">
 											<div class="form-group">
 												<span  class="form-label">Depart City</span>
-												<input type="hidden" name="Depart_City" value="submit" />
-												<select class="form-control" aria-placeholder="city 1">
+												<input type="hidden"  value="submit" />
+												<select name="Depart_City" class="form-control" aria-placeholder="city 1">
 													<?php foreach($Cities as $city): ?>
 													<option value="<?php echo $city->getid(); ?>"><?php echo $CityDAO->getCityNameById($city->getid()); ?></option>
 													<?php endforeach; ?>
@@ -53,8 +53,8 @@
 										<div class="col-md-4">
 											<div class="form-group">
 												<span class="form-label">Arrive City</span>
-												<input type="hidden" name="Arrive_City" value="submit" />
-												<select  class="form-control" aria-placeholder="city 1">
+												<input type="hidden"  value="submit" />
+												<select  name="Arrive_City" class="form-control" aria-placeholder="city 1">
 													<?php foreach($Cities as $city): ?>
 													<option value="<?php echo $city->getid(); ?>"><?php echo $CityDAO->getCityNameById($city->getid()); ?></option>
 													<?php endforeach; ?>
@@ -64,11 +64,7 @@
 										<div class="col-md-2">
 											<div class="form-group">
 												<span class="form-label">Guests</span>
-												<select class="form-control">
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-												</select>
+												<input name="datetime" type="date" class="form-control">
 												<span class="select-arrow"></span>
 											</div>
 										</div>
@@ -87,7 +83,7 @@
 								</div>
 								<div class="col-md-2">
 									<div class="form-btn">
-										<button type="" class="submit-btn">Check availability</button>
+										<button type="submit" class="submit-btn">Check availability</button>
 									</div>
 								</div>
 							</div>
@@ -113,7 +109,7 @@
 										<div class="col-md-4">
 											<div class="form-group">
 												<span class="form-label">Depart City</span>
-												<div class="form-control" type="text" placeholder="city1"><?php echo $horraire->getDepartnamecity(); ?> aaa <?php $arrive; ?></div>
+												<div class="form-control" type="text" placeholder="city1"><?php echo $horraire->getDepartnamecity(); ?> <?php $arrive; ?></div>
 											</div>
 										</div>
 										<div class="col-md-4">

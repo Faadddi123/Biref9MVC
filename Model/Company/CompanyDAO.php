@@ -54,6 +54,7 @@ class CompanyDAO{
         }
         
     }
+    
     public function getcompanyImageById($id) {
         $query = "SELECT image FROM company WHERE id = :id";
         $stmt = $this->db->prepare($query);

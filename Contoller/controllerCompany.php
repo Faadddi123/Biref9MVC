@@ -259,3 +259,45 @@ class contoller_horraires {
 
    
 }
+
+class Controller_searsh {
+    function searsh(){
+        $horraireDAO = new horraireDAO();
+        $RouteDAO = new RouteDAO();
+        $CityDAO = new CityDAO();
+        $BUSDAO = new BUSDAO();
+        $companyDAO = new CompanyDAO();
+        
+        if($_SERVER["methode_request"] = "post"){
+            $searshvar = new horraireDAO();
+            if(isset($_POST["Depart_City"]) && isset($_POST["Arrive_City"]))
+            $depart = intval($_POST["Depart_City"]);
+            $arrive = intval($_POST["Arrive_City"]);
+            $datetime = $_POST["datetime"];
+            
+            
+            if($depart != $arrive){
+                $_SESSION["depart"] = $depart;
+            $_SESSION["arrive"] = $arrive;
+            
+            $horraires = $searshvar->get_horraires_by_search($depart, $arrive,$datetime);
+            }else{
+                $horraires = $searshvar->get_horraires();
+            }
+            
+        }
+
+
+        foreach ($horraires as $horraire) {
+            $horraire->setDepartnamecity($CityDAO->getCityNameById($RouteDAO->getcityoftheroutedepart($horraire->getTri9())));
+            $horraire->setArrivetnamecity($CityDAO->getCityNameById($RouteDAO->getcityoftheroutearive($horraire->getTri9())));
+            $horraire->setCompanyname($companyDAO->getcompanyNameById($BUSDAO->get_id_of_company($horraire->getBus())));
+            $horraire->setImagecompany($companyDAO->getcompanyImageById($BUSDAO->get_id_of_company($horraire->getBus())));
+            
+        }
+        $Cities = $CityDAO->get_Citys();
+
+        include "View\View.php";
+
+    }
+}

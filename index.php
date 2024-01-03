@@ -11,13 +11,15 @@ $contoller_BUSs = new contoller_BUSs() ;
 $contoller_Citys = new contoller_Citys() ; 
 $contoller_Routes = new contoller_Routes() ; 
 $contoller_horraires = new contoller_horraires() ; 
+$contoller_searshes = new Controller_searsh() ; 
 $controller_Travels = new controller_Travels() ; 
-
+session_start();
 if (isset($_GET["action"])) {
     $action = $_GET["action"];
 
-    if ($action === "update") {
-        $controller_companies->setCompanies();
+    if ($action === "find") {
+        // $contoller_horraires->gethorraires($depart,$arrive) ;
+        $contoller_searshes->searsh() ;
     }
 
     // Add condition to display travels
@@ -25,16 +27,10 @@ if (isset($_GET["action"])) {
         $controller_Travels->getTravels();
     }
 } else {
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if(isset($_POST["Depart_City"]) && isset($_POST["Arrive_City"])){
-            $depart = intval($_POST["Depart_City"]);
-            $arrive = intval($_POST["Arrive_City"]);
-            echo $depart , $arrive;
-            $contoller_horraires->gethorraires($depart,$arrive) ;
-        
-        }else{
-
-        }
+    if($_SESSION["depart"] != 0 && $_SESSION["arrive"] != 0){
+        $depart = $_SESSION["depart"];
+        $arrive = $_SESSION["arrive"];
+    }else{
 
     }
 
